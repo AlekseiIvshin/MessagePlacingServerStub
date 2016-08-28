@@ -19,7 +19,11 @@
         <service
             android:name="com.eficksan.messaging.data.StubLocationService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="com.eficksan.messaging.BIND_LOCATIONS"/>
+            </intent-filter>
+        </service>
         <service
             android:name="com.eficksan.messaging.data.StubMessagingService"
             android:enabled="true"
