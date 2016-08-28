@@ -23,7 +23,11 @@
         <service
             android:name="com.eficksan.messaging.data.StubMessagingService"
             android:enabled="true"
-            android:exported="true"/>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.eficksan.messaging.BIND_PLACING_MESSAGE"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
