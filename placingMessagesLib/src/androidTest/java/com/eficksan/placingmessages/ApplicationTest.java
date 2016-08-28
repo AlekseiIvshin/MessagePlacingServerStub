@@ -1,4 +1,4 @@
-package com.eficksan.messageplacingserverstub;
+package com.eficksan.placingmessages;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,4 +1,4 @@
-package com.eficksan.messageplacingserverstub;
+package com.eficksan.messagingapi;
 
 import org.junit.Test;
 
