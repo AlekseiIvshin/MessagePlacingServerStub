@@ -1,9 +1,9 @@
-package com.eficksan.messagingapi.presentation;
+package com.eficksan.messaging.presentation;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.eficksan.messagingapi.R;
+import com.eficksan.messaging.R;
 
 public class MainActivity extends AppCompatActivity {
 

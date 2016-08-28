@@ -1,4 +1,4 @@
-package com.eficksan.messagingapi;
+package com.eficksan.messaging;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

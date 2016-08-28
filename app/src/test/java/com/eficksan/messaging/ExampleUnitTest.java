@@ -1,4 +1,4 @@
-package com.eficksan.messagingapi;
+package com.eficksan.messaging;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.eficksan.messagingapi.data;
+package com.eficksan.messaging.data;
 
 import android.app.Service;
 import android.content.Intent;
