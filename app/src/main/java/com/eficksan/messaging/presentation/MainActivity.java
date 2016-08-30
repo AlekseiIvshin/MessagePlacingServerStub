@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        startService(StubMessagingService.startForeground(this));
+        startService(StubMessagingService.stopForeground(this));
     }
 
     @Override
