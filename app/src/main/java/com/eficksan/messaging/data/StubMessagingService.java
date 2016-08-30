@@ -44,6 +44,7 @@ public class StubMessagingService extends Service {
         @Override
         public List<PlaceMessage> getMessagesByUser(String userId) throws RemoteException {
             try {
+                lock.lock();
                 return mMessages;
             } finally {
                 lock.unlock();
@@ -53,6 +54,7 @@ public class StubMessagingService extends Service {
         @Override
         public void removeAllMessages() throws RemoteException {
             try {
+                lock.lock();
                 mMessages.clear();
             } finally {
                 lock.unlock();
