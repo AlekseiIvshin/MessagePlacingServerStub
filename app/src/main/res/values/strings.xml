@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MessagePlacingServerStub</string>
+    <string name="notification_title">Bzzz!</string>
+    <string name="notification_text">Message server stub is working!</string>
 </resources>
