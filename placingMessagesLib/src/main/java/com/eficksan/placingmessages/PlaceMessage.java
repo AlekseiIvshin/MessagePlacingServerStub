@@ -43,8 +43,8 @@ public class PlaceMessage implements Parcelable {
 
     protected PlaceMessage(Parcel in) {
         this.id = in.readString();
-        this.latitude = in.readInt();
-        this.longitude = in.readInt();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
         this.message = in.readString();
         this.userId = in.readString();
         this.timeStamp = in.readLong();
@@ -52,8 +52,8 @@ public class PlaceMessage implements Parcelable {
 
     public void readFromParcel(Parcel in) {
         this.id = in.readString();
-        this.latitude = in.readInt();
-        this.longitude = in.readInt();
+        this.latitude = in.readDouble();
+        this.longitude = in.readDouble();
         this.message = in.readString();
         this.userId = in.readString();
         this.timeStamp = in.readLong();
