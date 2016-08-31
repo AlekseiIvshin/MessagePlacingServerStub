@@ -7,12 +7,12 @@ interface IPlaceMessageRepository {
     /**
     * Creates message and return new message.
     */
-    PlaceMessage addMessage(double latitude, double longitude, String message, String userId);
+    void addMessage(double latitude, double longitude,in  String message, in String userId, out PlaceMessage placeMessage);
 
     /**
     * Get near mesasges.
     */
-    List<PlaceMessage> getMessagesByUser(String userId);
+    void getMessagesByUser(in String userId, out List<PlaceMessage> messages);
 
     /**
     * Removes all messages.

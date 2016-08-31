@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.os.RemoteException;
 import android.support.v7.app.NotificationCompat;
+import android.util.Log;
 
 import com.eficksan.messaging.R;
 import com.eficksan.messaging.presentation.MainActivity;
@@ -24,28 +25,36 @@ public class StubMessagingService extends Service {
     private static final String ACTION_STOP_FOREGROUND = "ACTION_STOP_FOREGROUND";
     private static final String ACTION_START_FOREGROUND = "ACTION_START_FOREGROUND";
     private static final int NOTIFICATION_ID = 42;
+    private static final String TAG = StubMessagingService.class.getSimpleName();
 
     private final ReentrantLock lock = new ReentrantLock();
     private List<PlaceMessage> mMessages;
 
     private final IPlaceMessageRepository.Stub mBinder = new IPlaceMessageRepository.Stub() {
+
         @Override
-        public PlaceMessage addMessage(double latitude, double longitude, String message, String userId) throws RemoteException {
+        public void addMessage(double latitude, double longitude, String message, String userId, PlaceMessage placeMessage) throws RemoteException {
             try {
                 lock.lock();
-                PlaceMessage placeMessage = new PlaceMessage(String.valueOf(mMessages.size()), latitude, longitude, message, userId, System.currentTimeMillis());
+                placeMessage.id =String.valueOf(mMessages.size());
+                placeMessage.latitude =latitude;
+                placeMessage.longitude =longitude;
+                placeMessage.message =message;
+                placeMessage.userId =userId;
+                placeMessage.timeStamp =System.currentTimeMillis();
                 mMessages.add(placeMessage);
-                return placeMessage;
             } finally {
                 lock.unlock();
             }
         }
 
         @Override
-        public List<PlaceMessage> getMessagesByUser(String userId) throws RemoteException {
+        public void getMessagesByUser(String userId, List<PlaceMessage> messages) throws RemoteException {
+            Log.v(TAG, String.format("Request messages for userId = %s, messages count = %d", userId, mMessages.size()));
             try {
                 lock.lock();
-                return mMessages;
+                messages.clear();
+                messages.addAll(mMessages);
             } finally {
                 lock.unlock();
             }

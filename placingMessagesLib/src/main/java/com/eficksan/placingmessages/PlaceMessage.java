@@ -8,12 +8,14 @@ import android.os.Parcelable;
  * on 28.08.2016.
  */
 public class PlaceMessage implements Parcelable {
-    public final String id;
-    public final double latitude;
-    public final double longitude;
-    public final String message;
-    public final String userId;
-    public final long timeStamp;
+    public String id;
+    public double latitude;
+    public double longitude;
+    public String message;
+    public String userId;
+    public long timeStamp;
+
+    public PlaceMessage(){}
 
     public PlaceMessage(String id, double latitude, double longitude, String message, String userId, long timeStamp) {
         this.id = id;
@@ -40,6 +42,15 @@ public class PlaceMessage implements Parcelable {
     }
 
     protected PlaceMessage(Parcel in) {
+        this.id = in.readString();
+        this.latitude = in.readInt();
+        this.longitude = in.readInt();
+        this.message = in.readString();
+        this.userId = in.readString();
+        this.timeStamp = in.readLong();
+    }
+
+    public void readFromParcel(Parcel in) {
         this.id = in.readString();
         this.latitude = in.readInt();
         this.longitude = in.readInt();
