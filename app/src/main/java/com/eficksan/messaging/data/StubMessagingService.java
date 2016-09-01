@@ -84,11 +84,10 @@ public class StubMessagingService extends Service {
         }
 
         @Override
-        public Uri saveMessagesToCvs() throws RemoteException {
+        public Uri saveMessagesToCsv() throws RemoteException {
             try {
                 lock.lock();
-                List<PlaceMessage> messageList = new ArrayList<>(mMessages.size());
-                Collections.copy(mMessages, messageList);
+                ArrayList<PlaceMessage> messageList = new ArrayList<>(mMessages);
                 new MessageToCsvTask().execute(messageList);
             } finally {
                 lock.unlock();
@@ -188,7 +187,7 @@ public class StubMessagingService extends Service {
         @Override
         protected void onPostExecute(Uri uri) {
             if (uri != null) {
-                Toast.makeText(StubMessagingService.this, getString(R.string.messages_saved_in, "Documents", uri.getLastPathSegment()), Toast.LENGTH_SHORT).show();
+                Toast.makeText(StubMessagingService.this, getString(R.string.messages_saved_in, "Downloads", uri.getLastPathSegment()), Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -199,14 +198,14 @@ public class StubMessagingService extends Service {
          */
         private Uri saveMessagesToCsv(List<PlaceMessage> messageList) {
             if (isExternalStorageWritable()) {
-                File documentsRoot = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
+                File documentsRoot = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS);
                 File messagesFile = new File(documentsRoot, String.format("messages_%d.csv", System.currentTimeMillis()));
                 if (messagesFile.exists()) {
                     messagesFile.delete();
                 }
                 BufferedWriter messagesWriter = null;
                 try {
-                    messagesWriter = new BufferedWriter(new FileWriter(documentsRoot));
+                    messagesWriter = new BufferedWriter(new FileWriter(messagesFile));
                     for (PlaceMessage message : messageList) {
                         if (isCancelled()) {
                             return null;
@@ -239,7 +238,7 @@ public class StubMessagingService extends Service {
          * @return csv line
          */
         private String getMessageAsCsvLine(PlaceMessage message) {
-            return String.format("\"%s\",%d,%d,\"%s\",\"%s\",%d", message.id, message.latitude, message.longitude, message.message, message.userId, message.timeStamp);
+            return String.format("\"%s\",\"%f\",\"%f\",\"%s\",\"%s\",%d", message.id, message.latitude, message.longitude, message.message, message.userId, message.timeStamp);
         }
 
         /**
