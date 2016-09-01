@@ -2,4 +2,8 @@
     <string name="app_name">MessagePlacingServerStub</string>
     <string name="notification_title">Bzzz!</string>
     <string name="notification_text">Message server stub is working!</string>
+    <string name="messages_saved_in">Messages saved in %1$s directory in %2$s</string>
+    <string name="storage_is_not_available">Sorry, I can\'t save file...</string>
+    <string name="save_messages_to_csv">Save messages to CSV file</string>
+    <string name="message_service_is_unavaible">Message service is unavaible</string>
 </resources>
